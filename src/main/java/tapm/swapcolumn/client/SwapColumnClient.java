@@ -6,7 +6,6 @@ import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keymapping.v1.KeyMappingHelper;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.resources.Identifier;
-import org.lwjgl.glfw.GLFW;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,8 +27,8 @@ public class SwapColumnClient implements ClientModInitializer {
 
         swapKeyMapping = new KeyMapping(
                 "key.swapcolumn.swap_column",      // translation key for the keybind name
-                InputConstants.Type.KEYSYM,
-                GLFW.GLFW_KEY_UNKNOWN,        // unbound by default
+                InputConstants.Type.KEYBOARD,
+                InputConstants.UNKNOWN.getValue(),        // unbound by default
                 swapcolumnCategory
         );
 

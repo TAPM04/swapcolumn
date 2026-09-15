@@ -2,11 +2,11 @@ package tapm.swapcolumn.mixin;
 
 import tapm.swapcolumn.client.SwapColumnClient;
 import tapm.swapcolumn.client.SwapColumnState;
+import com.mojang.blaze3d.platform.InputConstants;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.KeyboardHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.input.KeyEvent;
-import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -24,7 +24,7 @@ public class KeyboardMixin {
 
         if (SwapColumnState.isActive()) {
             if (swapcolumn$handleActiveKey(mc, action, event)) ci.cancel();
-        } else if (action == GLFW.GLFW_PRESS) {
+        } else if (action == InputConstants.PRESS) {
             if (swapcolumn$handleIdlePress(mc, event)) ci.cancel();
         }
     }
@@ -40,9 +40,9 @@ public class KeyboardMixin {
         if (!isSwapKey && hotbarIdx < 0) return false;
 
         switch (action) {
-            case GLFW.GLFW_PRESS   -> swapcolumn$pressWhileActive(isSwapKey, hotbarIdx);
-            case GLFW.GLFW_RELEASE -> swapcolumn$releaseWhileActive(isSwapKey, hotbarIdx);
-            // GLFW_REPEAT is consumed silently
+            case InputConstants.PRESS   -> swapcolumn$pressWhileActive(isSwapKey, hotbarIdx);
+            case InputConstants.RELEASE -> swapcolumn$releaseWhileActive(isSwapKey, hotbarIdx);
+            // REPEAT is consumed silently
         }
         return true;
     }
